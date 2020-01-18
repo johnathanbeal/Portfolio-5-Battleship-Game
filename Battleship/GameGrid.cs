@@ -16,6 +16,25 @@ namespace Battleship
         private int hasAShip = 0;
         private int hasAHit = 1;
 
+        public int HasAShip { get { return hasAShip; }  private set { } }
+        public int HasAHit { get { return hasAHit; } private set { } }
+
+        private Hit[,] attemptsRecord = new Hit[8, 2];
+
+        public Hit GetAttemptsRecord(int x, int y)
+        {
+            return attemptsRecord[x - 1, y - 1];
+        }
+
+        public void SetHitsRecord(int x, int y, Hit hit)
+        {         
+            attemptsRecord[x - 1, y - 1] = hit; 
+        }
+
+
+
+        //public int HasAHit { get; set; }
+
         private int VerticalStarterIndex()
         {
             return Random.Next(0, 5);
@@ -84,8 +103,8 @@ namespace Battleship
 
         public bool[,,] CheckForHit(bool[,,] buul, int x, int y)
         {
-            if (buul[x, y, hasAShip] == true)
-                buul[x, y, hasAHit] = true;
+            if (buul[x - 1, y - 1, hasAShip] == true)
+                buul[x - 1, y - 1, hasAHit] = true;
 
             return buul;
         }
