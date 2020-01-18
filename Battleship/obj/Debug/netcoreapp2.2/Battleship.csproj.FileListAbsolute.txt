@@ -9,3 +9,13 @@ C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\obj\Debug\netcoreapp2.2\
 C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.AssemblyInfo.cs
 C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.dll
 C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.pdb
+C:\SDMM\Project-1-Battleship\Battleship\bin\Debug\netcoreapp2.2\Battleship.deps.json
+C:\SDMM\Project-1-Battleship\Battleship\bin\Debug\netcoreapp2.2\Battleship.runtimeconfig.json
+C:\SDMM\Project-1-Battleship\Battleship\bin\Debug\netcoreapp2.2\Battleship.runtimeconfig.dev.json
+C:\SDMM\Project-1-Battleship\Battleship\bin\Debug\netcoreapp2.2\Battleship.dll
+C:\SDMM\Project-1-Battleship\Battleship\bin\Debug\netcoreapp2.2\Battleship.pdb
+C:\SDMM\Project-1-Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.csprojAssemblyReference.cache
+C:\SDMM\Project-1-Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.AssemblyInfoInputs.cache
+C:\SDMM\Project-1-Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.AssemblyInfo.cs
+C:\SDMM\Project-1-Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.dll
+C:\SDMM\Project-1-Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.pdb

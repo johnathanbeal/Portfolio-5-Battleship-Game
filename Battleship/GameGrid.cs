@@ -13,24 +13,26 @@ namespace Battleship
 
         public Random Random { get; set; }
 
+        private int hasAShip = 0;
+        private int hasAHit = 1;
 
-        public int VerticalStarterIndex()
+        private int VerticalStarterIndex()
         {
             return Random.Next(0, 5);
         }
 
-        public int HorizontalStarterIndex()
+        private int HorizontalStarterIndex()
         {
             return Random.Next(0, 5);
         }
 
-        public enum ShipOrientation
+        private enum ShipOrientation
         {
             Vertical,
             Horizontal
         }
 
-        public bool? IsShipVertical()
+        private bool? IsShipVertical()
         {
             Array orientations = Enum.GetValues(typeof(ShipOrientation));
             ShipOrientation randomOrientation = (ShipOrientation)orientations.GetValue(Random.Next(orientations.Length));
@@ -42,55 +44,65 @@ namespace Battleship
                 return null;
         }
 
-        public Parabool[,] DefineBoardAsAllFalse(Parabool[,] parabola)
-        {
-            for (int x = 0; x < 10; x++)
+        public bool[,,] DefineBoardAsAllFalse(bool[,,] pairOfBool)
+        {           
+            for (int x = 0; x< 10; x++)
             {
-                for (int y = 0; y < 10; y++)
+                for (int y = 0; y< 10; y++)
                 {
-                    parabola[x, y].HasAShip = false;
-                    parabola[x, y].HasAHit = false;
-                }
+                    for (int z = 0; z< 2; z++)
+                    {
+                        pairOfBool[x, y, z] = false;
+                    }
+}
             }
-            return parabola;
+            return pairOfBool;
         }       
 
-        public Parabool[,] DefineShipLocation(Parabool[,] parabola, bool? shipIsVertical, int verticalStart, int horizontalStart)
+        private bool[,,] DefineShipLocation(bool[,,] booly, bool? shipIsVertical, int verticalStart, int horizontalStart)
         {
+            
             if((bool)shipIsVertical)
             {
-                parabola[verticalStart, horizontalStart].HasAShip = true;
-                parabola[verticalStart + 1, horizontalStart].HasAShip = true;
-                parabola[verticalStart + 2, horizontalStart].HasAShip = true;
-                parabola[verticalStart + 3, horizontalStart].HasAShip = true;
-                parabola[verticalStart + 4, horizontalStart].HasAShip = true;
+                booly[verticalStart, horizontalStart, hasAShip] = true;
+                booly[verticalStart + 1, horizontalStart, hasAShip] = true;
+                booly[verticalStart + 2, horizontalStart, hasAShip] = true;
+                booly[verticalStart + 3, horizontalStart, hasAShip] = true;
+                booly[verticalStart + 4, horizontalStart, hasAShip] = true;
             }
             else
             {
-                parabola[verticalStart, horizontalStart + 0].HasAShip = true;
-                parabola[verticalStart, horizontalStart + 1].HasAShip = true;
-                parabola[verticalStart, horizontalStart + 2].HasAShip = true;
-                parabola[verticalStart, horizontalStart + 3].HasAShip = true;
-                parabola[verticalStart, horizontalStart + 4].HasAShip = true;
+                booly[verticalStart, horizontalStart + 0, hasAShip] = true;
+                booly[verticalStart, horizontalStart + 1, hasAShip] = true;
+                booly[verticalStart, horizontalStart + 2, hasAShip] = true;
+                booly[verticalStart, horizontalStart + 3, hasAShip] = true;
+                booly[verticalStart, horizontalStart + 4, hasAShip] = true;
             }
-            return parabola;
+            return booly;
 
         }
 
-        public void GameOn()
+        public bool[,,] CheckForHit(bool[,,] buul, int x, int y)
         {
-            Parabool[,] PairOfBools = new Parabool[10, 10];
+            if (buul[x, y, hasAShip] == true)
+                buul[x, y, hasAHit] = true;
 
+            return buul;
+        }
+
+        public bool[,,] GameOn(bool[,,] boolArray)
+        {
+            
             Console.WriteLine("Game On!");
 
-            var boardIsAllFalse = DefineBoardAsAllFalse(PairOfBools);
+            //var boardIsAllFalse = DefineBoardAsAllFalse(PairOfBools);
 
             var shipOrientation = IsShipVertical();
             var verticalStartIndex = VerticalStarterIndex();
             var horizontalStartIndex = HorizontalStarterIndex();
 
-            var boardHasShip = DefineShipLocation(PairOfBools, shipOrientation, verticalStartIndex, horizontalStartIndex);
-            
+            var boardHasShip = DefineShipLocation(boolArray, shipOrientation, verticalStartIndex, horizontalStartIndex);
+            return boolArray;
         }
     }
 }
