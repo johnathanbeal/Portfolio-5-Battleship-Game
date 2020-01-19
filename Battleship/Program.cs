@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace Battleship
 {
@@ -40,6 +41,19 @@ namespace Battleship
                         }
                         
                     }
+                    else if (firstGridPoint == "CHEATCODE")
+                    {
+                        for(int x = 0; x < 10; x++)
+                        {
+                            for (int y = 0; y < 10; y++)
+                            {
+                                if (gameOn[x,y,0])
+                                {
+                                    Console.WriteLine("Coordinates " + x + ", " + y + " have a ship");
+                                }
+                            }
+                        }
+                    }
                     else
                     {
                         Console.WriteLine("The input is not a whole number");
@@ -63,30 +77,71 @@ namespace Battleship
                             Console.WriteLine("You selected number " + outputTwo + " for your second gridpoint for this turn");
                         }
                     }
+                    else if (secondGridPoint == "CHEATCODE")
+                    {
+                        for (int x = 0; x < 10; x++)
+                        {
+                            for (int y = 0; y < 10; y++)
+                            {
+                                if (gameOn[x, y, 0])
+                                {
+                                    Console.WriteLine("Coordinates " + x + ", " + y + " have a ship");
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("The input is not a whole number");
+                    }
                 }
                 
                 Console.WriteLine("CHECKING FOR HIT");
+                Point thisPoint = new Point(outputOne - 1, outputTwo - 1);
+                //int attemptsCounter = 0;
 
                 bool[,,] gameResults = gameGrid.CheckForHit(gameBoardBoolArray, outputOne,outputTwo);
 
                 if (gameResults[outputOne - 1, outputTwo - 1, gameGrid.HasAHit])
                 {
-                    if (gameGrid.GetAttemptsRecord(outputOne - 1, outputTwo - 1) != Hit.NoTry )
+                    var attemptsRecord = gameGrid.GetAttemptsRecord();
+                    foreach (Point xy in attemptsRecord)
                     {
-                        Console.WriteLine("You have already attempted to hit at these coordinates");
+                        if (xy == thisPoint)
+                        {
+                            Console.WriteLine("You have already attempted to hit at these coordinates");
+                            turnCounter++;
+                        }
+                        else
+                        {
+                            gameGrid.SetAttemptsRecord(outputOne, outputTwo, turnCounter);
+                            hitCounter++;
+                            Console.WriteLine("ITS A HIT!!!");
+                            break;
+                        }
                     }
-                    gameGrid.SetHitsRecord(outputOne, outputTwo, Hit.Hit);
-                    hitCounter++;
-                    Console.WriteLine("ITS A HIT!!!");
+                    
+                    
                 }
                 else if (!gameResults[outputOne - 1, outputTwo - 1, gameGrid.HasAHit])
                 {
-                    if (gameGrid.GetAttemptsRecord(outputOne - 1, outputTwo - 1) != Hit.NoTry)
+                    var attemptsRecord = gameGrid.GetAttemptsRecord();
+                    foreach (Point xy in attemptsRecord)
                     {
-                        Console.WriteLine("You have already attempted to hit at these coordinates");
+                        if (xy == thisPoint)
+                        {
+                            Console.WriteLine("You have already attempted to hit at these coordinates");
+                            turnCounter++;
+                            break;
+                        }
                     }
-                    gameGrid.SetHitsRecord(outputOne, outputTwo, Hit.Miss);
+                    
+                    gameGrid.SetAttemptsRecord(outputOne, outputTwo, turnCounter);
                     Console.WriteLine("You Missed!");
+                }
+                else
+                {
+                    Console.WriteLine("Your input resulted in an unknown error");
                 }
 
                 turnCounter++;

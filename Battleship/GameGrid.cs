@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Battleship
@@ -19,16 +20,16 @@ namespace Battleship
         public int HasAShip { get { return hasAShip; }  private set { } }
         public int HasAHit { get { return hasAHit; } private set { } }
 
-        private Hit[,] attemptsRecord = new Hit[8, 2];
+        private Point[] attemptsRecord = new Point[10];
 
-        public Hit GetAttemptsRecord(int x, int y)
+        public Point[] GetAttemptsRecord()
         {
-            return attemptsRecord[x - 1, y - 1];
+            return attemptsRecord;
         }
 
-        public void SetHitsRecord(int x, int y, Hit hit)
+        public void SetAttemptsRecord(int x, int y, int attempt)
         {         
-            attemptsRecord[x - 1, y - 1] = hit; 
+            attemptsRecord[attempt - 1] = new Point(x - 1, y - 1); 
         }
 
 
@@ -121,7 +122,7 @@ namespace Battleship
             var horizontalStartIndex = HorizontalStarterIndex();
 
             var boardHasShip = DefineShipLocation(boolArray, shipOrientation, verticalStartIndex, horizontalStartIndex);
-            return boolArray;
+            return boardHasShip;
         }
     }
 }
