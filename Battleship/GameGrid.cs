@@ -17,7 +17,7 @@ namespace Battleship
         private int hasAShip = 0;
         private int hasAHit = 1;
 
-        public int HasAShip { get { return hasAShip; }  private set { } }
+        public int HasAShip { get { return hasAShip; } private set { } }
         public int HasAHit { get { return hasAHit; } private set { } }
 
         private Point[] attemptsRecord = new Point[10];
@@ -100,14 +100,6 @@ namespace Battleship
             }
             return booly;
 
-        }
-
-        public bool[,,] CheckForHit(bool[,,] buul, int x, int y)
-        {
-            if (buul[x - 1, y - 1, hasAShip] == true)
-                buul[x - 1, y - 1, hasAHit] = true;
-
-            return buul;
         }
 
         public bool[,,] GameOn(bool[,,] boolArray)
