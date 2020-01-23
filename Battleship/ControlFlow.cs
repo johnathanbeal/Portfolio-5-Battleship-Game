@@ -55,9 +55,10 @@ namespace Battleship
                     {
                         Console.WriteLine("You selected a number greater than 10 or less than 1.  Epic fail.");
                     }
+                    else
                     {
                         inputIsNotVerifiedAsValid = false;
-                        Console.WriteLine("You selected number " + output + " for your first gridpoint for this turn");
+                        Console.WriteLine("You selected number " + output + " for this turn");
                     }
                 }
                 else if (gridPoint == "CHEATCODE")
@@ -121,7 +122,7 @@ namespace Battleship
                     if (xy == _point)
                     {
                         Console.WriteLine("You have already attempted to hit at these coordinates");
-                        _turnCounter++;
+                        _turnCounterLocalScope = _turnCounter + 1;
                         _hitCounterLocalScope = _hitCounter;
                         break;
                     }
@@ -129,7 +130,7 @@ namespace Battleship
                     {
                         _gamePlay.SetAttemptsRecord(_inputOne, _inputTwo, _turnCounter);
                         _hitCounter++;
-                        _turnCounter++;
+                        _turnCounterLocalScope = _turnCounter + 1;
                         Console.WriteLine("ITS A HIT!!!");
                         break;
                     }
