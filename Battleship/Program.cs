@@ -17,13 +17,13 @@ namespace Battleship
             int turnCounter = 1;
             int hitCounter = 0;
 
-            int turnCountOut;
-            int hitCountOut;
+            //int turnCountOut;
+            //int hitCountOut;
 
             int outputOne;
             int outputTwo;
 
-            while (turnCounter < 9 && hitCounter < 5)
+            while (turnCounter < 9 || hitCounter < 5)
             {
                 Console.WriteLine("This is turn number " + turnCounter);
 
@@ -33,11 +33,15 @@ namespace Battleship
 
                 Point thisPoint = new Point(outputOne - 1, outputTwo - 1);
 
-                Control.CheckForHitWorkflow(gameGrid, gameBoardBoolArray, thisPoint, outputOne, outputTwo, turnCounter, hitCounter, out hitCountOut, out turnCountOut);
+                var battleshipWasHit = Control.CheckForHit(gameGrid, gameBoardBoolArray, thisPoint, outputOne, outputTwo);
 
-                hitCounter = hitCountOut;
-                turnCounter = turnCountOut;
+                gameGrid.SetAttemptsRecord(outputOne, outputTwo, turnCounter);
 
+                if (battleshipWasHit)
+                {
+                    hitCounter++;
+                }
+                turnCounter++;
             }
 
             Control.CheckNumberOf(hitCounter);

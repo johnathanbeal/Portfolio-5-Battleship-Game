@@ -91,83 +91,84 @@ namespace Battleship
             return buul;
         }
 
-        public void CheckForHitWorkflow(GameGrid _game, bool[,,] _gameBoolArray, Point _point, int _inputOne, int _inputTwo, int _turnCounter, int _hitCounter, out int _turnCounterOut, out int _hitCounterOut)
+        public bool CheckForHit(GameGrid _game, bool[,,] _gameBoolArray, Point _point, int _inputOne, int _inputTwo)
         {
             Console.WriteLine("CHECKING FOR HIT");
 
-            var _turnCount_HeadCount = AttemptWorkflowHit(_game, _gameBoolArray, _point, _inputOne, _inputTwo, _turnCounter, _hitCounter);
-            _turnCounterOut = _turnCount_HeadCount.Item1;
-            _hitCounterOut = _turnCount_HeadCount.Item2;
+            var shipWasHit = AttemptWorkflow(_game, _gameBoolArray, _point, _inputOne, _inputTwo);
+            return shipWasHit;
+        }
 
-            var _headCount_TurnCount = AttemptWorkflowMiss(_game, _gameBoolArray, _point, _inputOne, _inputTwo, _turnCounter, _hitCounter);
-            _turnCounterOut = _headCount_TurnCount.Item1;
-            _hitCounterOut = _turnCount_HeadCount.Item2;
+        private bool AttemptWorkflow(GameGrid _gamePlay, bool[,,] _gameBoard, Point _point, int _inputOne, int _inputTwo)
+        {
+            var battleshipWasHit = false;
+            //int _turnCounterLocalScope;
+            //int _hitCounterLocalScope;
+            if (AttemptWasAHit(_gameBoard, _inputOne, _inputTwo))
+            {
+                battleshipWasHit = true;
+                var attemptsRecord = _gamePlay.GetAttemptsRecord();
+                foreach (Point xy in attemptsRecord)
+                {
+                    if (xy == _point)
+                    {
+                        Console.WriteLine("You have already attempted to hit at these coordinates");
+                        //_turnCounterLocalScope = _turnCounter + 1;
+                        //_hitCounterLocalScope = _hitCounter;
+                        break;
+                    }
+                    else
+                    {
+                        
+                        //_turnCounterLocalScope = _turnCounter + 1;
+                        Console.WriteLine("ITS A HIT!!!");
+                        return battleshipWasHit;
+                    }
+                }
+            }
+            else if (!AttemptWasAHit(_gameBoard, _inputOne, _inputTwo))
+            {
+                var attemptsRecord = _gamePlay.GetAttemptsRecord();
+                foreach (Point xy in attemptsRecord)
+                {
+                    if (xy == _point)
+                    {
+                        Console.WriteLine("You have already attempted to hit at these coordinates");
+                        //_turnCounter++;
+                        break;
+                    }
+                    else
+                    {
+                        //_gamePlay.SetAttemptsRecord(_inputOne, _inputTwo, _turnCounter);
+                        //_hitCounter++;
+                        //_turnCounter++;
+                        Console.WriteLine("You missed!");
+                        return battleshipWasHit;
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("The input was unknown");
+                //battleshipWasHit = null;
+                return battleshipWasHit;
+            }
+            return false;
         }
 
         private bool AttemptWasAHit(bool[,,] _gameBoolArray, int _inputOne, int _intputTwo)
         {
-            return _gameBoolArray[_inputOne - 1, _intputTwo - 1, HasAHit];
+            var wasAHit = _gameBoolArray[_inputOne - 1, _intputTwo - 1, HasAHit];
+
+            return wasAHit;
         }
 
-        private Tuple<int, int> AttemptWorkflowHit(GameGrid _gamePlay, bool[,,] _gameBoard, Point _point, int _inputOne, int _inputTwo, int _turnCounter, int _hitCounter)
-        {
+        //private Tuple<int, int> AttemptWorkflowMiss(GameGrid _gamePlay, bool[,,] _gameBoard, Point _point, int _inputOne, int _inputTwo, int _turnCounter, int _hitCounter)
+        //{
 
-            int _turnCounterLocalScope;
-            int _hitCounterLocalScope;
-            if (AttemptWasAHit(_gameBoard, _inputOne, _inputTwo))
-            {
-                var attemptsRecord = _gamePlay.GetAttemptsRecord();
-                foreach (Point xy in attemptsRecord)
-                {
-                    if (xy == _point)
-                    {
-                        Console.WriteLine("You have already attempted to hit at these coordinates");
-                        _turnCounterLocalScope = _turnCounter + 1;
-                        _hitCounterLocalScope = _hitCounter;
-                        break;
-                    }
-                    else
-                    {
-                        _gamePlay.SetAttemptsRecord(_inputOne, _inputTwo, _turnCounter);
-                        _hitCounter++;
-                        _turnCounterLocalScope = _turnCounter + 1;
-                        Console.WriteLine("ITS A HIT!!!");
-                        break;
-                    }
-                }
-            }
-            Tuple<int, int> _turnCount_hitCount = new Tuple<int, int>(_turnCounter, _hitCounter);
-            return _turnCount_hitCount;
-        }
-
-
-
-        private Tuple<int, int> AttemptWorkflowMiss(GameGrid _gamePlay, bool[,,] _gameBoard, Point _point, int _inputOne, int _inputTwo, int _turnCounter, int _hitCounter)
-        {
-            if (!AttemptWasAHit(_gameBoard, _inputOne, _inputTwo))
-            {
-                var attemptsRecord = _gamePlay.GetAttemptsRecord();
-                foreach (Point xy in attemptsRecord)
-                {
-                    if (xy == _point)
-                    {
-                        Console.WriteLine("You have already attempted to hit at these coordinates");
-                        _turnCounter++;
-                        break;
-                    }
-                    else
-                    {
-                        _gamePlay.SetAttemptsRecord(_inputOne, _inputTwo, _turnCounter);
-                        _hitCounter++;
-                        _turnCounter++;
-                        Console.WriteLine("You missed!");
-                        break;
-                    }
-                }              
-            }
-            Tuple<int, int> _turnCount_hitCount = new Tuple<int, int>(_turnCounter, _hitCounter);
-            return _turnCount_hitCount;
-        }
+        //    Tuple<int, int> _turnCount_hitCount = new Tuple<int, int>(_turnCounter, _hitCounter);
+        //    return _turnCount_hitCount;
+        //}
 
     }
 }
