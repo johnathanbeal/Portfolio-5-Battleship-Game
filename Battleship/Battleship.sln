@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleship", "Battleship.csproj", "{AB3751B2-9FC3-45F6-82B6-9EA157D3E7B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Battleship", "Battleship.csproj", "{AB3751B2-9FC3-45F6-82B6-9EA157D3E7B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleshipTests", "..\BattleshipTests\BattleshipTests.csproj", "{91C63E77-3FDC-4288-930A-4083741A591B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{AB3751B2-9FC3-45F6-82B6-9EA157D3E7B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB3751B2-9FC3-45F6-82B6-9EA157D3E7B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB3751B2-9FC3-45F6-82B6-9EA157D3E7B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91C63E77-3FDC-4288-930A-4083741A591B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91C63E77-3FDC-4288-930A-4083741A591B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91C63E77-3FDC-4288-930A-4083741A591B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91C63E77-3FDC-4288-930A-4083741A591B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

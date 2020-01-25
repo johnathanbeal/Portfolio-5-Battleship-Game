@@ -1,0 +1,17 @@
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\BattleshipTests.deps.json
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\BattleshipTests.runtimeconfig.json
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\BattleshipTests.runtimeconfig.dev.json
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\BattleshipTests.dll
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\BattleshipTests.pdb
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\Battleship.dll
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\Battleship.pdb
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.csprojAssemblyReference.cache
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.csproj.CoreCompileInputs.cache
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.AssemblyInfoInputs.cache
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.AssemblyInfo.cs
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.csproj.CopyComplete
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.dll
+C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.pdb
