@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Linq;
 
 namespace Battleship
 {
@@ -20,23 +21,23 @@ namespace Battleship
         {
             if (_turnCounter == MAXNUMBEROFHITSPERGAME)
             {
-                Console.WriteLine("You sunk my battleship!");
+                Console.WriteLine("You sunk my battleship!\n");
             }
             else
             {
-                Console.WriteLine("Number of hits is " + _turnCounter);
+                Console.WriteLine("Number of hits is " + _turnCounter + "\n");
             }
         }
 
-        public void IsItTheEnd(int _hitCounter)
+        public void IsItTheEnd(int _hitCounter, int _turnCounter)
         {
-            if (_hitCounter == NUMBEROFTURNSPERGAME)
+            if (_hitCounter == MAXNUMBEROFHITSPERGAME || _turnCounter == NUMBEROFTURNSPERGAME)
             {
-                Console.WriteLine("GAME OVER!!!");
+                Console.WriteLine("GAME OVER!!!\n");
             }
             else
             {
-                Console.WriteLine("The Game is Not Over!");
+                Console.WriteLine("The Game is Not Over!\n");
             }
         }
 
@@ -46,22 +47,22 @@ namespace Battleship
             string gridPoint = "";
             while (inputIsNotVerifiedAsValid)
             {
-                Console.WriteLine("SELECT A NUMBER BETWEEN 1 AND 10");
-                gridPoint = Console.ReadLine();
+                Console.WriteLine("SELECT A NUMBER BETWEEN 1 AND 10\n");
+                gridPoint = Console.ReadLine() + "\n";
 
                 if (int.TryParse(gridPoint, out output) == true)
                 {
                     if (output > 10 || output < 1)
                     {
-                        Console.WriteLine("You selected a number greater than 10 or less than 1.  Epic fail.");
+                        Console.WriteLine("You selected a number greater than 10 or less than 1.  Epic fail.\n");
                     }
                     else
                     {
                         inputIsNotVerifiedAsValid = false;
-                        Console.WriteLine("You selected number " + output + " for this turn");
+                        Console.WriteLine("You selected number " + output + " for this turn\n");
                     }
                 }
-                else if (gridPoint == "CHEATCODE")
+                else if (gridPoint == "CHEATCODE\n")
                 {
                     for (int x = 0; x < 10; x++)
                     {
@@ -73,10 +74,11 @@ namespace Battleship
                             }
                         }
                     }
+                    Console.WriteLine("\n");
                 }
                 else
                 {
-                    Console.WriteLine("The input is not a whole number");
+                    Console.WriteLine("The input is not a whole number\n");
                 }
             }
             output = int.Parse(gridPoint);
@@ -93,7 +95,7 @@ namespace Battleship
 
         public bool CheckForHit(GameGrid _game, bool[,,] _gameBoolArray, Point _point, int _inputOne, int _inputTwo)
         {
-            Console.WriteLine("CHECKING FOR HIT");
+            Console.WriteLine("CHECKING FOR HIT\n");
 
             var shipWasHit = AttemptWorkflow(_game, _gameBoolArray, _point, _inputOne, _inputTwo);
             return shipWasHit;
@@ -104,61 +106,62 @@ namespace Battleship
             var battleshipWasHit = false;
             //int _turnCounterLocalScope;
             //int _hitCounterLocalScope;
-            if (AttemptWasAHit(_gameBoard, _inputOne, _inputTwo))
+            var attemptsRecord = _gamePlay.GetAttemptsRecord();
+
+            if (attemptsRecord.Any(r => r == _point))
             {
-                battleshipWasHit = true;
-                var attemptsRecord = _gamePlay.GetAttemptsRecord();
-                foreach (Point xy in attemptsRecord)
-                {
-                    if (xy == _point)
-                    {
-                        Console.WriteLine("You have already attempted to hit at these coordinates");
+                Console.WriteLine("You have already attempted to hit at these coordinates\n");
+                //_turnCounterLocalScope = _turnCounter + 1;
+                //_hitCounterLocalScope = _hitCounter;
+                //return battleshipWasHit;
+            }
+            else if (AttemptWasAHit(_gameBoard, _inputOne, _inputTwo))
+            {
+                //var attemptsList = attemptsRecord.ToList();
+                
+                    
+                    //else
+                    //{
+                        battleshipWasHit = true;
+
                         //_turnCounterLocalScope = _turnCounter + 1;
-                        //_hitCounterLocalScope = _hitCounter;
-                        break;
-                    }
-                    else
-                    {
-                        
-                        //_turnCounterLocalScope = _turnCounter + 1;
-                        Console.WriteLine("ITS A HIT!!!");
+                        Console.WriteLine("ITS A HIT!!!\n");
                         return battleshipWasHit;
-                    }
-                }
+                   // }                
             }
             else if (!AttemptWasAHit(_gameBoard, _inputOne, _inputTwo))
             {
-                var attemptsRecord = _gamePlay.GetAttemptsRecord();
-                foreach (Point xy in attemptsRecord)
-                {
-                    if (xy == _point)
-                    {
-                        Console.WriteLine("You have already attempted to hit at these coordinates");
-                        //_turnCounter++;
-                        break;
-                    }
-                    else
-                    {
+                //var attemptsRecord = _gamePlay.GetAttemptsRecord();
+                ////foreach (Point xy in attemptsRecord)
+                ////{
+                //    if (attemptsRecord.Any(r => r == _point))
+                //    {
+                //        Console.WriteLine("You have already attempted to hit at these coordinates\n");
+                //        //_turnCounter++;
+                //        return battleshipWasHit;
+                //    }
+                //    else
+                //    {
                         //_gamePlay.SetAttemptsRecord(_inputOne, _inputTwo, _turnCounter);
                         //_hitCounter++;
                         //_turnCounter++;
-                        Console.WriteLine("You missed!");
-                        return battleshipWasHit;
-                    }
-                }
+                        Console.WriteLine("You missed!\n");
+                        //return battleshipWasHit;
+                    //}
+                //}
             }
             else
             {
-                Console.WriteLine("The input was unknown");
+                Console.WriteLine("The input was unknown\n");
                 //battleshipWasHit = null;
-                return battleshipWasHit;
+                //return battleshipWasHit;
             }
             return false;
         }
 
         private bool AttemptWasAHit(bool[,,] _gameBoolArray, int _inputOne, int _intputTwo)
         {
-            var wasAHit = _gameBoolArray[_inputOne - 1, _intputTwo - 1, HasAHit];
+            var wasAHit = _gameBoolArray[_inputOne - 1, _intputTwo - 1, HasAShip];
 
             return wasAHit;
         }

@@ -13,7 +13,7 @@ namespace Battleship
             var gameOn = gameGrid.GameOn(gameBoardBoolArray);
             ControlFlow Control = new ControlFlow();
             
-            Console.WriteLine("PLAY BATTLESHIP!");
+            Console.WriteLine("PLAY BATTLESHIP!\n");
             int turnCounter = 1;
             int hitCounter = 0;
 
@@ -23,9 +23,9 @@ namespace Battleship
             int outputOne;
             int outputTwo;
 
-            while (turnCounter < 9 || hitCounter < 5)
+            while (turnCounter < 9 && hitCounter < 5)
             {
-                Console.WriteLine("This is turn number " + turnCounter);
+                Console.WriteLine("This is turn number " + turnCounter + "\n");
 
                 Control.HandleInput(gameOn, out outputOne);
 
@@ -40,13 +40,21 @@ namespace Battleship
                 if (battleshipWasHit)
                 {
                     hitCounter++;
+                    Console.WriteLine("You have " + hitCounter + " hits!\n");
                 }
-                turnCounter++;
+                if (turnCounter < 8)
+                {
+                    turnCounter++;
+                }
+                else
+                {
+                    break;
+                }
             }
 
             Control.CheckNumberOf(hitCounter);
 
-            Control.IsItTheEnd(turnCounter);
+            Control.IsItTheEnd(hitCounter, turnCounter);
         }
     }
 }

@@ -105,7 +105,7 @@ namespace Battleship
         public bool[,,] GameOn(bool[,,] boolArray)
         {
             
-            Console.WriteLine("Game On!");
+            Console.WriteLine("Game On!\n");
 
             //var boardIsAllFalse = DefineBoardAsAllFalse(PairOfBools);
 
