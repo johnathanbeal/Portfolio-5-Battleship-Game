@@ -20,22 +20,26 @@ namespace Battleship
             //int turnCountOut;
             //int hitCountOut;
 
-            int outputOne;
-            int outputTwo;
+            int[] output = new int[2];
 
             while (turnCounter < 9 && hitCounter < 5)
             {
                 Console.WriteLine("This is turn number " + turnCounter + "\n");
 
-                Control.HandleInput(gameOn, out outputOne);
+                for (int i = 0; i < 2; i++)
+                {
+                    Console.WriteLine("SELECT A NUMBER BETWEEN 1 AND 10\n");
+                    string gridPoint = Console.ReadLine();
 
-                Control.HandleInput(gameOn, out outputTwo);
+                    output[i] = Control.HandleInput(gameOn, output[i], gridPoint);
+                }
+                
 
-                Point thisPoint = new Point(outputOne - 1, outputTwo - 1);
+                Point thisPoint = new Point(output[0] - 1, output[1] - 1);
 
-                var battleshipWasHit = Control.CheckForHit(gameGrid, gameBoardBoolArray, thisPoint, outputOne, outputTwo);
+                var battleshipWasHit = Control.CheckForHit(gameGrid, gameBoardBoolArray, thisPoint, output[0], output[1]);
 
-                gameGrid.SetAttemptsRecord(outputOne, outputTwo, turnCounter);
+                gameGrid.SetAttemptsRecord(output[0], output[1], turnCounter);
 
                 if (battleshipWasHit)
                 {

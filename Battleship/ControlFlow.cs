@@ -50,47 +50,91 @@ namespace Battleship
             return message;
         }
 
-        public void HandleInput(bool[,,] gameOnBoolArray, out int output)
+        public int HandleInput(bool[,,] gameOnBoolArray, int output, string gridPoint)
         {
             bool inputIsNotVerifiedAsValid = true;
-            string gridPoint = "";
-            while (inputIsNotVerifiedAsValid)
-            {
-                Console.WriteLine("SELECT A NUMBER BETWEEN 1 AND 10\n");
-                gridPoint = Console.ReadLine() + "\n";
 
-                if (int.TryParse(gridPoint, out output) == true)
+            int i = 0;
+            while (inputIsNotVerifiedAsValid && i < 10)
+            {               
+                inputIsNotVerifiedAsValid = ParseGridPoint(gridPoint, out output, gameOnBoolArray);
+                i++;
+            }
+            //output = int.Parse(gridPoint);
+            return output;
+        }
+
+        public bool ParseGridPoint(string _gridPoint, out int _output, bool[,,] _gameOnBoolArray)
+        {
+            string[] _messages;
+
+            if (int.TryParse(_gridPoint, out _output) == true)
+            {
+                if (GridPointMessage(_output, _gridPoint, out _messages, _gameOnBoolArray))
                 {
-                    if (output > 10 || output < 1)
-                    {
-                        Console.WriteLine("You selected a number greater than 10 or less than 1.  Epic fail.\n");
-                    }
-                    else
-                    {
-                        inputIsNotVerifiedAsValid = false;
-                        Console.WriteLine("You selected number " + output + " for this turn\n");
-                    }
-                }
-                else if (gridPoint == "CHEATCODE\n")
-                {
-                    for (int x = 0; x < 10; x++)
-                    {
-                        for (int y = 0; y < 10; y++)
-                        {
-                            if (gameOnBoolArray[x, y, 0])
-                            {
-                                Console.WriteLine("Coordinates " + x + ", " + y + " have a ship");
-                            }
-                        }
-                    }
-                    Console.WriteLine("\n");
+                    Console.WriteLine(_messages[0]);
+                    return false;
                 }
                 else
                 {
-                    Console.WriteLine("The input is not a whole number\n");
+                    Console.WriteLine(_messages[0]);
+                    return true;
                 }
             }
-            output = int.Parse(gridPoint);
+            else if (GridPointMessage(_output, _gridPoint, out _messages, _gameOnBoolArray))
+            {
+                for (int x = 0; x < 5; x++)
+                {                   
+                    Console.WriteLine(_messages[x]);                       
+                }
+                Console.WriteLine("\n");
+                return false;
+            }
+            else
+            {
+                Console.WriteLine(_messages[0]);
+                return true;
+            }
+        }
+
+        public bool GridPointMessage(int? _output, string _consoleReadlineInput, out string[] _message, bool[,,] _gameOnBoolArray)
+        {
+            _message = new string[5];
+            string[] _insideMessage = new string[5];
+
+            if (_consoleReadlineInput == "CHEATCODE")
+            {
+                int _counter = 0;
+                for (int x = 0; x < 10; x++)
+                {
+                    for (int y = 0; y < 10; y++)
+                    {
+                        if (_gameOnBoolArray[x, y, 0])
+                        {
+                            _insideMessage[_counter] = "Coordinates " + x + ", " + y + " have a ship";
+                            _counter++;
+                        }
+                    }
+                }
+
+                _message = _insideMessage;
+                return true;
+            }
+            else if (_output > 10 || _output < 1)
+            {
+                _message[0] = "You selected a number greater than 10 or less than 1.  Epic fail.\n";
+                return false;
+            }
+            else if (_output < 10 && _output >= 1)
+            {
+                _message[0] = "You selected number " + _output + " for this turn\n";
+                return true;
+            }           
+            else
+            {
+                _message[0] = "The input is not a whole number\n";
+                return true;
+            }
         }
 
         private bool[,,] CheckForHit(bool[,,] buul, int x, int y)

@@ -1,6 +1,8 @@
 using Battleship;
 using System;
 using Xunit;
+using Moq;
+using System.Collections.Generic;
 
 namespace BattleshipTests
 {
@@ -69,5 +71,198 @@ namespace BattleshipTests
 
             Assert.Equal(expectedMessage, readMessage);
         }
+
+        [Fact]
+        public void HandleInput_CorrectInputExpectsIntBetween1And10()
+        {
+            Random ra = new Random();
+            
+            int input = ra.Next(1, 10);
+
+            var validInputList = new List<string> {
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
+            //"CHEATCODE"
+            };
+
+            ControlFlow control = new ControlFlow();
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+
+            var result = control.HandleInput(gameBoardBoolArray, input, validInputList[ra.Next(validInputList.Count)]);
+            Assert.True(result > 0 && result < 11);
+        }
+
+        [Fact]
+        public void HandleInput_IncorrectExceedsInputExpects()
+        {
+            Random ra = new Random();
+
+            int input1 = ra.Next(-10, -1);
+            int input2 = ra.Next(11, 20);
+
+            var inputs = new List<int> { input1, input2 };
+            var index = ra.Next(0, 1);
+            var input = inputs[index];
+
+            var validInputList = new List<string> {
+                "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9", "-10",
+                "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" 
+            };
+
+            ControlFlow control = new ControlFlow();
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+
+            var result = control.HandleInput(gameBoardBoolArray, input, validInputList[ra.Next(validInputList.Count)]);
+            Assert.True(result > 0 || result < 11);
+        }
+
+        [Fact]
+        public void HandleInput_CheatcodeInputExpectsIntOF0()
+        {
+            Random ra = new Random();
+
+            int input = ra.Next(1, 10);
+
+            var validInputList = new List<string> {
+            "CHEATCODE"
+            };
+
+            ControlFlow control = new ControlFlow();
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+
+            var result = control.HandleInput(gameBoardBoolArray, input, validInputList[ra.Next(validInputList.Count)]);
+            Assert.True(result == 0);
+        }
+
+        [Fact]
+        public void ParseGridPoint_Message_ReturnsTrueIfInputIsCheatCodeMessage()
+        {
+            Random ra = new Random();
+
+            int input = ra.Next(1, 10);
+
+            ControlFlow control = new ControlFlow();
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+
+            string[] noMessage = new string[2];
+
+            var result = control.GridPointMessage(0, "CHEATCODE", out noMessage, gameBoardBoolArray);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void ParseGridPoint_Message_ReturnsFalseIfInputExceeds10()
+        {
+            Random ra = new Random();
+
+            int input = ra.Next(11, 100);
+
+            ControlFlow control = new ControlFlow();
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+
+            string[] noMessage = new string[2];
+
+            var result = control.GridPointMessage(input, "", out noMessage, gameBoardBoolArray);
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void ParseGridPoint_Message_ReturnsFalseIfInputLessThan1()
+        {
+            Random ra = new Random();
+
+            int input = ra.Next(-100, 0);
+
+            ControlFlow control = new ControlFlow();
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+
+            string[] noMessage = new string[2];
+
+            var result = control.GridPointMessage(input, "", out noMessage, gameBoardBoolArray);
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void ParseGridPoint_Message_ReturnsTrueIfInputBetween1And10()
+        {
+            Random ra = new Random();
+
+            int input = ra.Next(1, 10);
+
+            Randomness randomy = new Randomness();
+            var randomString = randomy.RandomString(14, true);
+
+            ControlFlow control = new ControlFlow();
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+
+            string[] noMessage = new string[2];
+
+            var result = control.GridPointMessage(null, randomString, out noMessage, gameBoardBoolArray);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void ParseGridPoint_Message_ExpectedMessageReceivedWhenInputStringIsCheatcode()
+        {
+            Random ra = new Random();
+
+            int input = ra.Next(1, 10);
+
+            GameGrid gameGrid = new GameGrid(ra);
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+            var gameOn = gameGrid.GameOn(gameBoardBoolArray);
+
+            var expectedString = "CHEATCODE";
+
+            ControlFlow control = new ControlFlow();
+
+            string[] _message = new string[2];
+
+            var result = control.GridPointMessage(input, expectedString, out _message, gameOn);
+
+            for (int i = 0; i < 5; i++)
+            {
+                Assert.Contains("Coordinates ", _message[i]);
+                Assert.Contains(", ", _message[i]);
+                Assert.Contains(" have a ship", _message[i]);
+            }
+        }
+
+        [Fact]
+        public void ParseGridPoint_Message_ExpectedMessageReceivedIfInputExceeds10()
+        {
+            Random ra = new Random();
+
+            int input = ra.Next(11, 100);
+
+            var expectedString = "You selected a number greater than 10 or less than 1.  Epic fail.\n";
+
+            ControlFlow control = new ControlFlow();
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+
+            string[] _message = new string[2];
+
+            var result = control.GridPointMessage(input, "", out _message, gameBoardBoolArray);
+            Assert.Equal(expectedString, _message[0]);
+        }
+
+        [Fact]
+        public void ParseGridPoint_Message_ExpectedMessageReceivedIfInputLessThan1()
+        {
+            Random ra = new Random();
+
+            int input = ra.Next(-100, 0);
+
+            var expectedString = "You selected a number greater than 10 or less than 1.  Epic fail.\n";
+
+            ControlFlow control = new ControlFlow();
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+
+            string[] _message = new string[2];
+
+            var result = control.GridPointMessage(input, "", out _message, gameBoardBoolArray);
+            Assert.Equal(expectedString, _message[0]);
+        }
+
+        //next add unit tests for out messages
     }
 }

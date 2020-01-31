@@ -32,8 +32,6 @@ namespace Battleship
             attemptsRecord[attempt - 1] = new Point(x - 1, y - 1); 
         }
 
-
-
         //public int HasAHit { get; set; }
 
         private int VerticalStarterIndex()
@@ -103,8 +101,7 @@ namespace Battleship
         }
 
         public bool[,,] GameOn(bool[,,] boolArray)
-        {
-            
+        {           
             Console.WriteLine("Game On!\n");
 
             //var boardIsAllFalse = DefineBoardAsAllFalse(PairOfBools);
