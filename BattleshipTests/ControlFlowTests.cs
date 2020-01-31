@@ -3,6 +3,10 @@ using System;
 using Xunit;
 using Moq;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("BattleshipTests.ControlFlowTests")]
+
 
 namespace BattleshipTests
 {
@@ -261,6 +265,19 @@ namespace BattleshipTests
 
             var result = control.GridPointMessage(input, "", out _message, gameBoardBoolArray);
             Assert.Equal(expectedString, _message[0]);
+        }
+
+        [Fact]
+        public void AttemptWasAHit_ReturnsTrueWhenAttemptIsAHit()
+        {
+            Random ra = new Random();
+
+            GameGrid gameGrid = new GameGrid(ra);
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+            var gameOn = gameGrid.GameOn(gameBoardBoolArray);
+
+            ControlFlow control = new ControlFlow();
+            //control.
         }
 
         //next add unit tests for out messages

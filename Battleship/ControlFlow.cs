@@ -137,13 +137,13 @@ namespace Battleship
             }
         }
 
-        private bool[,,] CheckForHit(bool[,,] buul, int x, int y)
-        {
-            if (buul[x - 1, y - 1, hasAShip] == true)
-                buul[x - 1, y - 1, hasAHit] = true;
+        //private bool[,,] CheckForHit(bool[,,] buul, int x, int y)
+        //{
+        //    if (buul[x - 1, y - 1, hasAShip] == true)
+        //        buul[x - 1, y - 1, hasAHit] = true;
 
-            return buul;
-        }
+        //    return buul;
+        //}
 
         public bool CheckForHit(GameGrid _game, bool[,,] _gameBoolArray, Point _point, int _inputOne, int _inputTwo)
         {
