@@ -96,7 +96,7 @@ namespace Battleship
             
             if((bool)shipIsVertical)
             {
-                booly[verticalStart, horizontalStart, hasAShip] = true;
+                booly[verticalStart + 0, horizontalStart, hasAShip] = true;
                 booly[verticalStart + 1, horizontalStart, hasAShip] = true;
                 booly[verticalStart + 2, horizontalStart, hasAShip] = true;
                 booly[verticalStart + 3, horizontalStart, hasAShip] = true;
