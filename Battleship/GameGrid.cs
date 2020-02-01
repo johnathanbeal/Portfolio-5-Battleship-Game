@@ -77,7 +77,7 @@ namespace Battleship
             return pairOfBool;
         }       
 
-        private bool[,,] DefineShipLocation(bool[,,] booly, bool? shipIsVertical, int verticalStart, int horizontalStart)
+        public bool[,,] DefineShipLocation(bool[,,] booly, bool? shipIsVertical, int verticalStart, int horizontalStart)
         {
             
             if((bool)shipIsVertical)
