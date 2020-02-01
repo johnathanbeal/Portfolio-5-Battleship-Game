@@ -22,7 +22,7 @@ namespace Battleship
             string message;
             if (_hitCounter == MAXNUMBEROFHITSPERGAME)
             {
-                message = "You sunk my battleship!\n";
+                message = "You sunk my battleship!\n".ToUpper();
                 Console.WriteLine(message);
                 return message;
             }
@@ -180,9 +180,10 @@ namespace Battleship
             return false;
         }
 
-        private bool AttemptWasAHit(bool[,,] _gameBoolArray, int _inputOne, int _intputTwo)
+        public bool AttemptWasAHit(bool[,,] _gameBoolArray, int _inputOne, int _intputTwo)
         {
-            var wasAHit = _gameBoolArray[_inputOne - 1, _intputTwo - 1, HasAShip];
+            //var wasAHit = _gameBoolArray[_inputOne - 1, _intputTwo - 1, HasAShip];
+            var wasAHit = _gameBoolArray[_inputOne, _intputTwo, HasAShip];
 
             return wasAHit;
         }

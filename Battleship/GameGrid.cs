@@ -34,14 +34,28 @@ namespace Battleship
 
         //public int HasAHit { get; set; }
 
-        private int VerticalStarterIndex()
+        private int VerticalStarterIndex(bool shipIsVertical)
         {
-            return Random.Next(0, 5);
+            if(shipIsVertical)
+            {
+                return Random.Next(0, 5);
+            }
+            else
+            {
+                return Random.Next(0, 9);
+            }
         }
 
-        private int HorizontalStarterIndex()
+        private int HorizontalStarterIndex(bool shipIsVertical)
         {
-            return Random.Next(0, 5);
+            if (shipIsVertical)
+            {
+                return Random.Next(0, 9);
+            }
+            else
+            {
+                return Random.Next(0, 5);
+            }
         }
 
         private enum ShipOrientation
@@ -107,8 +121,8 @@ namespace Battleship
             //var boardIsAllFalse = DefineBoardAsAllFalse(PairOfBools);
 
             var shipOrientation = IsShipVertical();
-            var verticalStartIndex = VerticalStarterIndex();
-            var horizontalStartIndex = HorizontalStarterIndex();
+            var verticalStartIndex = VerticalStarterIndex((bool)shipOrientation);
+            var horizontalStartIndex = HorizontalStarterIndex((bool)shipOrientation);
 
             var boardHasShip = DefineShipLocation(boolArray, shipOrientation, verticalStartIndex, horizontalStartIndex);
             return boardHasShip;

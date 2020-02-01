@@ -4,6 +4,7 @@ using Xunit;
 using Moq;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Drawing;
 
 [assembly: InternalsVisibleTo("BattleshipTests.ControlFlowTests")]
 
@@ -280,6 +281,80 @@ namespace BattleshipTests
             //control.
         }
 
-        //next add unit tests for out messages
+        [Theory]
+        [InlineData(0, 1, true)]
+        [InlineData(0, 2, true)]
+        [InlineData(0, 3, true)]
+        [InlineData(0, 4, true)]
+        [InlineData(0, 5, true)]
+        [InlineData(0, 6, true)]
+        [InlineData(1, 0, true)]
+        [InlineData(1, 1, true)]
+        [InlineData(1, 2, true)]
+        [InlineData(1, 3, true)]
+        [InlineData(1, 4, true)]
+        [InlineData(1, 5, true)]
+        [InlineData(1, 6, true)]
+        [InlineData(1, 7, true)]
+        [InlineData(1, 8, true)]
+        [InlineData(1, 9, true)]
+        [InlineData(2, 0, true)]
+        [InlineData(2, 1, true)]
+        [InlineData(2, 2, true)]
+        [InlineData(2, 3, true)]
+        [InlineData(2, 4, true)]
+        [InlineData(2, 5, true)]
+        [InlineData(2, 6, true)]
+        [InlineData(2, 7, true)]
+        [InlineData(2, 8, true)]
+        [InlineData(2, 9, true)]
+        [InlineData(3, 0, true)]
+        [InlineData(3, 1, true)]
+        [InlineData(3, 2, true)]
+        [InlineData(3, 3, true)]
+        [InlineData(3, 4, true)]
+        [InlineData(3, 5, true)]
+        [InlineData(3, 6, true)]
+        [InlineData(3, 7, true)]
+        [InlineData(3, 8, true)]
+        [InlineData(3, 9, true)]
+        [InlineData(4, 0, true)]
+        [InlineData(4, 1, true)]
+        [InlineData(4, 2, true)]
+        [InlineData(4, 3, true)]
+        [InlineData(4, 4, true)]
+        [InlineData(4, 5, true)]
+        [InlineData(4, 6, true)]
+        [InlineData(4, 7, true)]
+        [InlineData(4, 8, true)]
+        [InlineData(4, 9, true)]
+        [InlineData(5, 0, true)]
+        [InlineData(5, 1, true)]
+        [InlineData(5, 2, true)]
+        [InlineData(5, 3, true)]
+        [InlineData(5, 4, true)]
+        [InlineData(5, 5, true)]
+        [InlineData(5, 6, true)]
+        [InlineData(5, 7, true)]
+        [InlineData(5, 8, true)]
+        [InlineData(5, 9, true)]
+
+        public void CheckForHit_WhenHitReturnsTrue(int x, int y, bool shipOrientation)
+        {
+            Random r = new Random();
+
+            GameGrid gameGrid = new GameGrid(r);
+            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+
+            var boardHasShip = gameGrid.DefineShipLocation(gameBoardBoolArray, shipOrientation, x, y);
+
+            ControlFlow groundControl = new ControlFlow();
+
+            Point thisPoint = new Point(x - 1, y - 1);
+
+            var attemptWasAHit = groundControl.CheckForHit(gameGrid, boardHasShip, thisPoint, x, y);
+
+            Assert.True(attemptWasAHit);
+        }
     }
 }

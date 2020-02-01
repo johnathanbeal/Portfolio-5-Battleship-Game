@@ -170,25 +170,10 @@ namespace BattleshipTests
 
             bool[,,] boolArray = new bool[0, 0, 0];
 
-            var boardWithShipLocation = gameNight.GameOn(boolArray);
-            var truepointcount = 0;
+            Exception ex = Assert.Throws<IndexOutOfRangeException>(() => gameNight.GameOn(boolArray));
 
-            for (int x = 0; x < 10; x++)
-            {
-                for (int y = 0; y < 10; y++)
-                {
-                    for (int z = 0; z < 2; z++)
-                    {
-                        var thisPoint = boardWithShipLocation[x, y, z];
-                        if (thisPoint)
-                        {
-                            truepointcount++;
-                        }
-                    }
-                }
-            }
-            Assert.Equal(5, truepointcount);
-
+            Assert.Equal("Index was outside the bounds of the array.", ex.Message);
+          
         }
     }
 }
