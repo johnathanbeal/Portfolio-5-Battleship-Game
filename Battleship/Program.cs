@@ -43,8 +43,8 @@ namespace Battleship
 
                 var battleshipWasHit = Control.CheckForHit(gameGrid, gameBoardBoolArray, thisPoint, output[0] - 1, output[1] - 1);//do I need to subtract 1 from each output?
 
-                gameGrid.SetAttemptsRecord(output[0], output[1], turnCounter);
-
+                //gameGrid.SetAttemptsRecord(output[0], output[1], turnCounter);
+                gameGrid.SetAttemptsRecord(thisPoint, HitClass.ifBattleShipAttempt(battleshipWasHit));
                 if (battleshipWasHit)
                 {
                     hitCounter++;

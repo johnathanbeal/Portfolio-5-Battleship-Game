@@ -22,8 +22,8 @@ namespace Battleship
             string message;
             if (_hitCounter == MAXNUMBEROFHITSPERGAME)
             {
-                message = "You sunk my battleship!\n".ToUpper();
-                Console.WriteLine(message);
+                message = "You sunk my battleship!\n";
+                Console.WriteLine(message.ToUpper());
                 return message;
             }
             else
@@ -93,7 +93,7 @@ namespace Battleship
             else
             {
                 Console.WriteLine(_messages[0]);
-                return true;
+                return false;
             }
         }
 
@@ -156,9 +156,9 @@ namespace Battleship
         private bool AttemptWorkflow(GameGrid _gamePlay, bool[,,] _gameBoard, Point _point, int _inputOne, int _inputTwo)
         {
             var battleshipWasHit = false;
-            var attemptsRecord = _gamePlay.GetAttemptsRecord();
+            var attemptsRecord = _gamePlay.GetAttemptsList();
 
-            if (attemptsRecord.Any(r => r == _point))
+            if (attemptsRecord.Any(r => r.Item1 == _point))
             {
                 Console.WriteLine("You have already attempted to hit at these coordinates\n");
             }
@@ -180,10 +180,18 @@ namespace Battleship
             return false;
         }
 
-        public bool AttemptWasAHit(bool[,,] _gameBoolArray, int _inputOne, int _intputTwo)
+        private bool AttemptWasAHit(bool[,,] _gameBoolArray, int _inputOne, int _intputTwo)
         {
-            //var wasAHit = _gameBoolArray[_inputOne - 1, _intputTwo - 1, HasAShip];
-            var wasAHit = _gameBoolArray[_inputOne, _intputTwo, HasAShip];
+            bool wasAHit;
+            try
+            {
+                wasAHit = _gameBoolArray[_inputOne, _intputTwo, HasAShip];
+            }
+            catch(System.IndexOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new System.ArgumentOutOfRangeException("index parameter is out of range.", ex);
+            }
 
             return wasAHit;
         }

@@ -40,7 +40,7 @@ namespace BattleshipTests
 
             var expectedMessage = "You sunk my battleship!\n";
 
-            Assert.Equal(expectedMessage.ToUpper(), readMessage);
+            Assert.Equal(expectedMessage, readMessage);
         }
 
         [Fact]
@@ -345,7 +345,7 @@ namespace BattleshipTests
         [InlineData(4, 0, false)]
         [InlineData(5, 0, false)]
         [InlineData(0, 1, false)]
-        //[InlineData(1, 1, false)]
+        [InlineData(1, 1, false)]
         [InlineData(2, 1, false)]
         [InlineData(3, 1, false)]
         [InlineData(4, 1, false)]
@@ -409,9 +409,10 @@ namespace BattleshipTests
 
             ControlFlow groundControl = new ControlFlow();
 
-            Point thisPoint = new Point(x - 1, y - 1);
+            Point thisPoint = new Point(x, y);
 
             var attemptWasAHit = groundControl.CheckForHit(gameGrid, boardHasShip, thisPoint, x, y);
+            gameGrid.SetAttemptsRecord(thisPoint, HitClass.ifBattleShipAttempt(attemptWasAHit));
 
             Assert.True(attemptWasAHit);
         }

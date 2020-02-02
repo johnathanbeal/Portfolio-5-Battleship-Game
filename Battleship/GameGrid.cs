@@ -22,14 +22,26 @@ namespace Battleship
 
         private Point[] attemptsRecord = new Point[10];
 
+        private List<Tuple<Point, Hit>> Attempts = new List<Tuple<Point, Hit>>();// (new Point { X = 0, Y = 0 }, Hit.NoTry);
+
         public Point[] GetAttemptsRecord()
         {
             return attemptsRecord;
         }
 
+        public List<Tuple<Point, Hit>> GetAttemptsList()
+        {
+            return Attempts;
+        }
+
         public void SetAttemptsRecord(int x, int y, int attempt)
         {         
             attemptsRecord[attempt - 1] = new Point(x - 1, y - 1); 
+        }
+
+        public void SetAttemptsRecord(Point pit, Hit hit)
+        {
+            Attempts.Add(new Tuple<Point, Hit>(pit, hit));
         }
 
         //public int HasAHit { get; set; }
@@ -58,11 +70,11 @@ namespace Battleship
             }
         }
 
-        private enum ShipOrientation
-        {
-            Vertical,
-            Horizontal
-        }
+        //private enum ShipOrientation
+        //{
+        //    Vertical,
+        //    Horizontal
+        //}
 
         private bool? IsShipVertical()
         {
@@ -109,6 +121,29 @@ namespace Battleship
                 booly[verticalStart, horizontalStart + 2, hasAShip] = true;
                 booly[verticalStart, horizontalStart + 3, hasAShip] = true;
                 booly[verticalStart, horizontalStart + 4, hasAShip] = true;
+            }
+            return booly;
+
+        }
+
+        public HasShip[,,] DefineShipLocation(HasShip[,,] booly, bool? shipIsVertical, int verticalStart, int horizontalStart)
+        {
+
+            if ((bool)shipIsVertical)
+            {
+                booly[verticalStart + 0, horizontalStart, hasAShip] = HasShip.Ship;
+                booly[verticalStart + 1, horizontalStart, hasAShip] = HasShip.Ship;
+                booly[verticalStart + 2, horizontalStart, hasAShip] = HasShip.Ship;
+                booly[verticalStart + 3, horizontalStart, hasAShip] = HasShip.Ship;
+                booly[verticalStart + 4, horizontalStart, hasAShip] = HasShip.Ship;
+            }
+            else
+            {
+                booly[verticalStart, horizontalStart + 0, hasAShip] = HasShip.Ship;
+                booly[verticalStart, horizontalStart + 1, hasAShip] = HasShip.Ship;
+                booly[verticalStart, horizontalStart + 2, hasAShip] = HasShip.Ship;
+                booly[verticalStart, horizontalStart + 3, hasAShip] = HasShip.Ship;
+                booly[verticalStart, horizontalStart + 4, hasAShip] = HasShip.Ship;
             }
             return booly;
 

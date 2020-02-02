@@ -162,7 +162,7 @@ namespace BattleshipTests
         }
 
         [Fact]
-        public void GameOn_ErrorneousBoolReturns_()
+        public void GameOn_ErrorneousBoolReturnsExpectedErrorAndMessage_()
         {
             Random r = new Random();
 
