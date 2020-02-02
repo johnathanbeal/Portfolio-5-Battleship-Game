@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace Battleship
 {
@@ -21,6 +22,7 @@ namespace Battleship
             //int hitCountOut;
 
             int[] output = new int[2];
+            int urOut;
 
             while (turnCounter < 9 && hitCounter < 5)
             {
@@ -29,12 +31,31 @@ namespace Battleship
                 for (int i = 0; i < 2; i++)
                 {
                     Console.WriteLine("SELECT A NUMBER BETWEEN 1 AND 10\n");
-                    string gridPoint = Console.ReadLine();
+                    string gridPointInput = Console.ReadLine();
 
-                    output[i] = Control.HandleInput(gameOn, output[i], gridPoint);
-                    if(gridPoint == "CHEATCODE")
+                    // Part 2: call Regex.Match.
+                    Match match = Regex.Match(gridPointInput, @"([A-Za-z0-9\-]+)",
+                        RegexOptions.IgnoreCase);
+
+                    // Part 3: check the Match for Success.
+                    if (match.Success && int.TryParse(gridPointInput, out urOut) != true)
                     {
+                        Control.HandleInput(gameOn, output[i], gridPointInput);
                         i--;
+                    }
+                    else if (gridPointInput == "CHEATCODE")
+                    {
+                        Control.HandleInput(gameOn, output[i], gridPointInput);
+                        i--;
+                    }
+                    else if (output[i] > 10 || output[i] < 1)
+                    {
+                        Control.HandleInput(gameOn, output[i], gridPointInput);
+                        i--;
+                    }
+                    else
+                    {
+                        output[i] = Control.HandleInput(gameOn, output[i], gridPointInput);
                     }
                 }
                 
