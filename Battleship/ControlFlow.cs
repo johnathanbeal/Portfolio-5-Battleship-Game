@@ -128,9 +128,9 @@ namespace Battleship
                 _message[0] = "You selected a number greater than 10 or less than 1.  Epic fail.\n";
                 return _message;
             }
-            else if (_output < 10 && _output >= 1)
+            else if (_output <= 10 && _output >= 1)
             {
-                _message[0] = "You selected number " + _output + " for this turn\n";
+                _message[0] = "You selected number " + _output + " for this selection\n";
                 return _message;
             }
             else

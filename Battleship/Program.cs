@@ -38,7 +38,7 @@ namespace Battleship
                         RegexOptions.IgnoreCase);
 
                     // Part 3: check the Match for Success.
-                    if (match.Success && int.TryParse(gridPointInput, out urOut) != true)
+                    if (match.Success && int.TryParse(gridPointInput, out output[i]) != true)
                     {
                         Control.HandleInput(gameOn, output[i], gridPointInput);
                         i--;

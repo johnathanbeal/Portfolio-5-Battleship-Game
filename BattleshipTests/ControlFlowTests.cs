@@ -175,8 +175,8 @@ namespace BattleshipTests
 
             var result = control.ConsoleMessage(input, input.ToString(), out noMessage, gameBoardBoolArray);
             Assert.Contains("You selected number ", result[0]);
-            Assert.Contains(" for this turn\n", result[0]);
-            Assert.Equal("You selected number " + input.ToString() + " for this turn\n", result[0]);
+            Assert.Contains(" for this selection\n", result[0]);
+            Assert.Equal("You selected number " + input.ToString() + " for this selection\n", result[0]);
         }
 
         [Fact]
