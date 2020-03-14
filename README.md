@@ -14,4 +14,8 @@ Early in 2020 I decided that I needed to become a Software Development Engineer 
 
 #Author
 
+Johnathan Beal is a QA Automation Engineer at i360, an important data analytics firm based in Northern Virginia.
+
 [Linkedin](https://www.linkedin.com/notifications/)
+
+**johnathanbeal@gmail.com**
