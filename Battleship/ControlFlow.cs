@@ -17,6 +17,63 @@ namespace Battleship
 
         const int MAXNUMBEROFHITSPERGAME = 5;
         const int NUMBEROFTURNSPERGAME = 8;
+
+        Random ra;
+        GameGrid gameGrid;
+
+        public ControlFlow()
+        {
+            ra = new Random();
+            gameGrid = new GameGrid(ra);
+        }
+
+        public ControlFlow(GameGrid _gameGrid)
+        {
+            gameGrid = _gameGrid;
+        }
+
+        public void GameOn(UserInput userInput)
+        {
+            Console.WriteLine("PLAY BATTLESHIP!\n");
+
+            int turnCounter = 0;
+            int hitCounter = 0;
+
+            while (turnCounter < 9 && hitCounter < 5)
+            {
+                Console.WriteLine("This is turn number " + turnCounter + "\n");
+
+                var rowNumber = userInput.ProcessUserInput(BattleshipEnum.Row);
+
+                var columnNumber = userInput.ProcessUserInput(BattleshipEnum.Column);
+
+                Console.WriteLine("CHECKING FOR HIT\n");
+                var shipWasHit = gameGrid.CheckForHit(rowNumber, columnNumber);
+
+                if (shipWasHit == true)
+                {
+                    hitCounter++;
+                    Console.WriteLine("ITS A HIT!!!\n");
+                }
+                else
+                {
+                    Console.WriteLine("You missed!\n");
+                }
+
+                turnCounter++;
+
+                DisplayGameResults(hitCounter, turnCounter);
+            }
+        }
+
+
+
+
+
+
+
+
+
         public string CheckNumberOf(int _hitCounter)
         {
             string message;
@@ -28,7 +85,7 @@ namespace Battleship
             }
             else
             {
-                message = "Number of hits is " + _hitCounter + "\n";
+                message = "Number of hits was " + _hitCounter + "\n";
                 Console.WriteLine(message);
                 return message;
             }
@@ -48,6 +105,22 @@ namespace Battleship
                 Console.WriteLine(message);
             }
             return message;
+        }
+
+        public void DisplayGameResults(int _hits, int _count)
+        {
+            if (_hits == MAXNUMBEROFHITSPERGAME)
+            {
+                Console.WriteLine("You sunk my battleship!");
+            }
+            else if (_count > NUMBEROFTURNSPERGAME)
+            {
+                Console.WriteLine("There was a program error, or you cheated");
+            }
+            else
+            {
+                Console.WriteLine("Game Over!");
+            }
         }
 
         public int HandleInput(bool[,,] gameOnBoolArray, int output, string gridPoint)
@@ -169,8 +242,6 @@ namespace Battleship
 
         public bool CheckForHit(GameGrid _game, bool[,,] _gameBoolArray, Point _point, int _inputOne, int _inputTwo)
         {
-            Console.WriteLine("CHECKING FOR HIT\n");
-
             var shipWasHit = AttemptWorkflow(_game, _gameBoolArray, _point, _inputOne, _inputTwo);
             return shipWasHit;
         }
@@ -187,13 +258,13 @@ namespace Battleship
             else if (AttemptWasAHit(_gameBoard, _inputOne, _inputTwo))
             {                
                 battleshipWasHit = true;
-                Console.WriteLine("ITS A HIT!!!\n");
+                //Console.WriteLine("ITS A HIT!!!\n");
                 return battleshipWasHit;
             }
             else if (!AttemptWasAHit(_gameBoard, _inputOne, _inputTwo))
             {
                
-                Console.WriteLine("You missed!\n");
+                //Console.WriteLine("You missed!\n");
             }
             else
             {

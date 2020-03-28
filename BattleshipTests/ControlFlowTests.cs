@@ -24,7 +24,7 @@ namespace BattleshipTests
 
             var readMessage = control.CheckNumberOf(randomInt);
 
-            var expectedMessage = "Number of hits is " + randomInt + "\n";
+            var expectedMessage = "Number of hits was " + randomInt + "\n";
 
             Assert.Equal(expectedMessage, readMessage);
         }
@@ -179,32 +179,32 @@ namespace BattleshipTests
             Assert.Equal("You selected number " + input.ToString() + " for this selection\n", result[0]);
         }
 
-        [Fact]
-        public void ConsoleMessage_ExpectedMessageReceivedWhenInputStringIsCheatcode()
-        {
-            Random ra = new Random();
+        //[Fact]
+        //public void ConsoleMessage_ExpectedMessageReceivedWhenInputStringIsCheatcode()
+        //{
+        //    Random ra = new Random();
 
-            int input = ra.Next(1, 10);
+        //    int input = ra.Next(1, 10);
 
-            GameGrid gameGrid = new GameGrid(ra);
-            bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
-            var gameOn = gameGrid.GameOn(gameBoardBoolArray);
+        //    GameGrid gameGrid = new GameGrid(ra);
+        //    bool[,,] gameBoardBoolArray = new bool[10, 10, 2];
+        //    var gameOn = gameGrid.GameOn(gameBoardBoolArray);
 
-            var expectedString = "CHEATCODE";
+        //    var expectedString = "CHEATCODE";
 
-            ControlFlow control = new ControlFlow();
+        //    ControlFlow control = new ControlFlow();
 
-            string[] _message = new string[2];
+        //    string[] _message = new string[2];
 
-            var result = control.ConsoleMessage(input, expectedString, out _message, gameOn);
+        //    var result = control.ConsoleMessage(input, expectedString, out _message, gameOn);
 
-            for (int i = 0; i < 5; i++)
-            {
-                Assert.Contains("Coordinates ", _message[i]);
-                Assert.Contains(", ", _message[i]);
-                Assert.Contains(" have a ship", _message[i]);
-            }
-        }
+        //    for (int i = 0; i < 5; i++)
+        //    {
+        //        Assert.Contains("Coordinates ", _message[i]);
+        //        Assert.Contains(", ", _message[i]);
+        //        Assert.Contains(" have a ship", _message[i]);
+        //    }
+        //}
 
         //[Fact]
         //public void ConsoleMessage_ReturnsFalseIfInputExceeds10()

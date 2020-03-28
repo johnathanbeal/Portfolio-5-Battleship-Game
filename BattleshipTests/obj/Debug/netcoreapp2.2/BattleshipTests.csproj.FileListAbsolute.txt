@@ -9,7 +9,6 @@ C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreap
 C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\Battleship.dll
 C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\bin\Debug\netcoreapp2.2\Battleship.pdb
 C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.csprojAssemblyReference.cache
-C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.csproj.CoreCompileInputs.cache
 C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.AssemblyInfoInputs.cache
 C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.AssemblyInfo.cs
 C:\Users\jbeal\source\repos\SDMM2\Battleship\BattleshipTests\obj\Debug\netcoreapp2.2\BattleshipTests.csproj.CopyComplete

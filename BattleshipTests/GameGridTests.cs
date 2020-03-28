@@ -131,49 +131,49 @@ namespace BattleshipTests
             }
         }
 
-        [Fact]
-        public void GameOn_Returns_5True()
-        {
-            Random r = new Random();
+        //[Fact]
+        //public void GameOn_Returns_5True()
+        //{
+        //    Random r = new Random();
 
-            GameGrid gameNight = new GameGrid(r);
+        //    GameGrid gameNight = new GameGrid(r);
 
-            bool[,,] boolArray = new bool[10, 10, 2];
+        //    bool[,,] boolArray = new bool[10, 10, 2];
 
-            var boardWithShipLocation = gameNight.GameOn(boolArray);
-            var truepointcount = 0;
+        //    var boardWithShipLocation = gameNight.GameOn(boolArray);
+        //    var truepointcount = 0;
 
-            for (int x = 0; x < 10; x++)
-            {
-                for (int y = 0; y < 10; y++)
-                {
-                    for (int z = 0; z < 2; z++)
-                    {
-                       var thisPoint = boardWithShipLocation[x, y, z];
-                       if (thisPoint)
-                        {
-                            truepointcount++;
-                        }
-                    }
-                }
-            }
-            Assert.Equal(5, truepointcount);
+        //    for (int x = 0; x < 10; x++)
+        //    {
+        //        for (int y = 0; y < 10; y++)
+        //        {
+        //            for (int z = 0; z < 2; z++)
+        //            {
+        //               var thisPoint = boardWithShipLocation[x, y, z];
+        //               if (thisPoint)
+        //                {
+        //                    truepointcount++;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    Assert.Equal(5, truepointcount);
             
-        }
+        //}
 
-        [Fact]
-        public void GameOn_ErrorneousBoolReturnsExpectedErrorAndMessage_()
-        {
-            Random r = new Random();
+        //[Fact]
+        //public void GameOn_ErrorneousBoolReturnsExpectedErrorAndMessage_()
+        //{
+        //    Random r = new Random();
 
-            GameGrid gameNight = new GameGrid(r);
+        //    GameGrid gameNight = new GameGrid(r);
 
-            bool[,,] boolArray = new bool[0, 0, 0];
+        //    bool[,,] boolArray = new bool[0, 0, 0];
 
-            Exception ex = Assert.Throws<IndexOutOfRangeException>(() => gameNight.GameOn(boolArray));
+        //    Exception ex = Assert.Throws<IndexOutOfRangeException>(() => gameNight.GameOn(boolArray));
 
-            Assert.Equal("Index was outside the bounds of the array.", ex.Message);
+        //    Assert.Equal("Index was outside the bounds of the array.", ex.Message);
           
-        }
+        //}
     }
 }

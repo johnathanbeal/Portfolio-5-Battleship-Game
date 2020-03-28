@@ -10,12 +10,33 @@ namespace Battleship
         public GameGrid(Random rand)
         {
             Random = rand;
+            for (int i = 0; i < _grid.Length; i++)
+            {
+                _grid[i] = new bool[10];
+                for (int k = 0; k < _grid[i].Length; k++)
+                {
+                    _grid[i][k] = false;
+                }
+            }
+
+            var shipOrientation = IsShipVertical();
+            var verticalStartIndex = VerticalStarterIndex((bool)shipOrientation);
+            var horizontalStartIndex = HorizontalStarterIndex((bool)shipOrientation);
+
+            _grid = DefineShipLocation(_grid, shipOrientation, verticalStartIndex, horizontalStartIndex);
         }
 
         public Random Random { get; set; }
 
         private int hasAShip = 0;
         private int hasAHit = 1;
+
+        private bool[][] _grid = new bool[10][];
+
+        public bool CheckForHit(int row, int column)
+        {
+            return _grid[row - 1][column - 1];
+        }
 
         public int HasAShip { get { return hasAShip; } private set { } }
         public int HasAHit { get { return hasAHit; } private set { } }
@@ -101,12 +122,12 @@ namespace Battleship
 }
             }
             return pairOfBool;
-        }       
+        }
 
         public bool[,,] DefineShipLocation(bool[,,] booly, bool? shipIsVertical, int verticalStart, int horizontalStart)
         {
-            
-            if((bool)shipIsVertical)
+
+            if ((bool)shipIsVertical)
             {
                 booly[verticalStart + 0, horizontalStart, hasAShip] = true;
                 booly[verticalStart + 1, horizontalStart, hasAShip] = true;
@@ -123,6 +144,29 @@ namespace Battleship
                 booly[verticalStart, horizontalStart + 4, hasAShip] = true;
             }
             return booly;
+
+        }
+
+        public bool[][] DefineShipLocation(bool[][] _defineGamGrid, bool? shipIsVertical, int verticalStart, int horizontalStart)
+        {
+            
+            if((bool)shipIsVertical)
+            {
+                _defineGamGrid[verticalStart + 0][horizontalStart] = true;
+                _defineGamGrid[verticalStart + 1][horizontalStart] = true;
+                _defineGamGrid[verticalStart + 2][horizontalStart] = true;
+                _defineGamGrid[verticalStart + 3][horizontalStart] = true;
+                _defineGamGrid[verticalStart + 4][horizontalStart] = true;
+            }
+            else
+            {
+                _defineGamGrid[verticalStart][horizontalStart + 0] = true;
+                _defineGamGrid[verticalStart][horizontalStart + 1] = true;
+                _defineGamGrid[verticalStart][horizontalStart + 2] = true;
+                _defineGamGrid[verticalStart][horizontalStart + 3] = true;
+                _defineGamGrid[verticalStart][horizontalStart + 4] = true;
+            }
+            return _defineGamGrid;
 
         }
 
@@ -149,18 +193,16 @@ namespace Battleship
 
         }
 
-        public bool[,,] GameOn(bool[,,] boolArray)
-        {           
-            Console.WriteLine("Game On!\n");
+        //public bool[,,] GameOn(bool[,,] boolArray)
+        //{
 
-            //var boardIsAllFalse = DefineBoardAsAllFalse(PairOfBools);
+        //    ////var boardIsAllFalse = DefineBoardAsAllFalse(PairOfBools);
 
-            var shipOrientation = IsShipVertical();
-            var verticalStartIndex = VerticalStarterIndex((bool)shipOrientation);
-            var horizontalStartIndex = HorizontalStarterIndex((bool)shipOrientation);
 
-            var boardHasShip = DefineShipLocation(boolArray, shipOrientation, verticalStartIndex, horizontalStartIndex);
-            return boardHasShip;
-        }
+
+        //    //var boardHasShip = DefineShipLocation(boolArray, shipOrientation, verticalStartIndex, horizontalStartIndex);
+        //    //return boardHasShip;
+        //    return _grid;
+        //}
     }
 }

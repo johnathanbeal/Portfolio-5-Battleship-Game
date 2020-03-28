@@ -3,7 +3,6 @@ C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\bin\Debug\netcoreapp2.2\
 C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\bin\Debug\netcoreapp2.2\Battleship.runtimeconfig.dev.json
 C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\bin\Debug\netcoreapp2.2\Battleship.dll
 C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\bin\Debug\netcoreapp2.2\Battleship.pdb
-C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.csproj.CoreCompileInputs.cache
 C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.AssemblyInfoInputs.cache
 C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.AssemblyInfo.cs
 C:\Users\jbeal\source\repos\SDMM2\Battleship\Battleship\obj\Debug\netcoreapp2.2\Battleship.dll
