@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Battleship
 {
-    public enum ShipOrientation
-    {
-        Vertical,
-        Horizontal
+    public enum RowOrColumn
+    {  
+            Row,
+            Column   
     }
 }
