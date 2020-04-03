@@ -64,5 +64,7 @@ namespace Battleship
             return _defineGamGrid;
         }
 
+        
+
     }
 }
